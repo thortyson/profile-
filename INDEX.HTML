@@ -1,0 +1,2717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D. Dhamodhar | iOS-Themed Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --ios-blue: #007AFF;
+            --ios-gray: #F2F2F7;
+            --ios-dark: #1C1C1E;
+            --ios-light: #FFFFFF;
+            --ios-green: #34C759;
+            --ios-indigo: #5856D6;
+            --ios-orange: #FF9500;
+            --ios-pink: #FF2D55;
+            --ios-purple: #AF52DE;
+            --ios-red: #FF3B30;
+            --ios-teal: #5AC8FA;
+            --ios-yellow: #FFCC00;
+            --ios-label: #3C3C43;
+            --ios-secondary-label: #3C3C4399;
+            --ios-tertiary-label: #3C3C434D;
+            --ios-system-fill: #78788033;
+            --ios-secondary-system-fill: #78788028;
+            --ios-tertiary-system-fill: #7676801F;
+            --ios-quaternary-system-fill: #74748014;
+            --ios-separator: #3C3C434A;
+            --ios-opaque-separator: #C6C6C8;
+            --ios-system-background: #FFFFFF;
+            --ios-secondary-system-background: #F2F2F7;
+            --ios-tertiary-system-background: #FFFFFF;
+            --ios-system-grouped-background: #F2F2F7;
+            --ios-secondary-grouped-background: #FFFFFF;
+            --ios-tertiary-grouped-background: #F2F2F7;
+            --ios-dynamic-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            --ios-card-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+            --ios-navbar-height: 88px;
+            --ios-tabbar-height: 83px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: var(--ios-system-grouped-background);
+            color: var(--ios-label);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Unique iOS-inspired scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--ios-secondary-system-background);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--ios-system-fill);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--ios-blue);
+        }
+
+        /* Dynamic Island */
+        .dynamic-island {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 35px;
+            background-color: var(--ios-dark);
+            border-radius: 20px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--ios-dynamic-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .dynamic-island:hover {
+            width: 150px;
+        }
+
+        .island-time {
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* iOS-style navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--ios-navbar-height);
+            background-color: rgba(242, 242, 247, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 999;
+            border-bottom: 1px solid var(--ios-separator);
+        }
+
+        .nav-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--ios-label);
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-control {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-control:hover {
+            transform: scale(1.1);
+        }
+
+        .control-close {
+            background-color: var(--ios-red);
+        }
+
+        .control-minimize {
+            background-color: var(--ios-orange);
+        }
+
+        .control-maximize {
+            background-color: var(--ios-green);
+        }
+
+        /* Main content */
+        .container {
+            padding-top: var(--ios-navbar-height);
+            padding-bottom: var(--ios-tabbar-height);
+            min-height: 100vh;
+        }
+
+        /* Hero section with unique iOS-style */
+        .hero {
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 122, 255, 0.1) 0%, rgba(0, 122, 255, 0) 70%);
+            z-index: -1;
+            animation: pulse 15s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.2);
+            }
+        }
+
+        .hero-avatar {
+            /* Responsive avatar: grows on larger viewports but stays constrained on small screens */
+            width: clamp(140px, 18vw, 260px);
+            height: clamp(140px, 18vw, 260px);
+            border-radius: 28px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--ios-light);
+            box-shadow: var(--ios-card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .hero-avatar:hover {
+            transform: rotate(5deg) scale(1.05);
+            border-color: var(--ios-blue);
+        }
+
+        .hero-name {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--ios-label);
+            position: relative;
+        }
+
+        .hero-name::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background-color: var(--ios-blue);
+            border-radius: 3px;
+        }
+
+        .hero-title {
+            font-size: 18px;
+            color: var(--ios-secondary-label);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .hero-bio {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--ios-label);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .ios-button {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .ios-button-primary {
+            background-color: var(--ios-blue);
+            color: white;
+        }
+
+        .ios-button-primary:hover {
+            background-color: #0066CC;
+            transform: translateY(-2px);
+        }
+
+        .ios-button-secondary {
+            background-color: var(--ios-secondary-system-fill);
+            color: var(--ios-blue);
+        }
+
+        .ios-button-secondary:hover {
+            background-color: var(--ios-system-fill);
+            transform: translateY(-2px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background-color: var(--ios-secondary-system-background);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--ios-label);
+            font-size: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--ios-system-fill);
+            transform: translateY(-2px);
+            color: var(--ios-blue);
+        }
+
+        /* iOS-style segmented control */
+        .segmented-control {
+            display: flex;
+            background-color: var(--ios-secondary-system-fill);
+            border-radius: 10px;
+            padding: 4px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .segmented-control input {
+            display: none;
+        }
+
+        .segmented-control label {
+            flex: 1;
+            text-align: center;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--ios-secondary-label);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .segmented-control input:checked + label {
+            color: var(--ios-blue);
+        }
+
+        .segmented-control .selector {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            height: calc(100% - 8px);
+            background-color: var(--ios-system-background);
+            border-radius: 8px;
+            box-shadow: var(--ios-card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        /* Sections */
+        .section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Ensure full-width sections on small screens */
+        @media (max-width: 990px) {
+            .section { max-width: 100%; padding-left: 16px; padding-right: 16px; }
+            .card-grid, .projects-container, .skills-container { grid-template-columns: 1fr; }
+            .timeline { padding-left: 8px; padding-right: 8px; }
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--ios-label);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 24px;
+            background-color: var(--ios-blue);
+            border-radius: 4px;
+        }
+
+        /* iOS-style cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .ios-card {
+            background-color: var(--ios-system-background);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--ios-card-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .ios-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--ios-separator);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: white;
+        }
+
+        .card-icon-blue {
+            background-color: var(--ios-blue);
+        }
+
+        .card-icon-purple {
+            background-color: var(--ios-purple);
+        }
+
+        .card-icon-yellow {
+            background-color: var(--ios-yellow);
+        }
+
+        .card-icon-orange {
+            background-color: var(--ios-orange);
+        }
+
+        .card-icon-green {
+            background-color: var(--ios-green);
+        }
+
+        .card-icon-pink {
+            background-color: var(--ios-pink);
+        }
+
+        .progress-yellow {
+            background-color: var(--ios-yellow);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ios-label);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-text {
+            color: var(--ios-secondary-label);
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .card-footer {
+            padding: 15px 20px;
+            border-top: 1px solid var(--ios-separator);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-link {
+            color: var(--ios-blue);
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .card-link:hover {
+            color: #0066CC;
+        }
+
+        /* Skills section with unique visualization */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            background-color: var(--ios-system-background);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--ios-card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .skill-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .skill-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ios-label);
+        }
+
+        .skill-bar {
+            height: 6px;
+            background-color: var(--ios-secondary-system-fill);
+            border-radius: 3px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 1.5s ease;
+        }
+
+        .progress-blue {
+            background-color: var(--ios-blue);
+        }
+
+        .progress-green {
+            background-color: var(--ios-green);
+        }
+
+        .progress-orange {
+            background-color: var(--ios-orange);
+        }
+
+        .progress-purple {
+            background-color: var(--ios-purple);
+        }
+
+        .skill-level {
+            font-size: 14px;
+            color: var(--ios-secondary-label);
+            text-align: right;
+        }
+
+        /* Projects section with unique iOS-style */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background-color: var(--ios-system-background);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--ios-card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--ios-separator);
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--ios-label);
+        }
+
+        .project-description {
+            color: var(--ios-secondary-label);
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .project-tag {
+            padding: 5px 10px;
+            background-color: var(--ios-secondary-system-fill);
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--ios-secondary-label);
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Education timeline with iOS style */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20px;
+            height: 100%;
+            width: 2px;
+            background-color: var(--ios-separator);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 30px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--ios-blue);
+            border: 4px solid var(--ios-system-background);
+        }
+
+        .timeline-content {
+            background-color: var(--ios-system-background);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--ios-card-shadow);
+        }
+
+        .timeline-date {
+            font-size: 14px;
+            color: var(--ios-secondary-label);
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--ios-label);
+        }
+
+        .timeline-subtitle {
+            font-size: 16px;
+            color: var(--ios-secondary-label);
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            font-size: 14px;
+            color: var(--ios-secondary-label);
+        }
+
+        /* Contact form (styled for current markup) */
+        .contact-form {
+            max-width: 680px;
+            margin: 0 auto;
+            background-color: var(--ios-system-background);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--ios-card-shadow);
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 18px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--ios-label);
+            letter-spacing: 0.1px;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form input[type="tel"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--ios-separator);
+            border-radius: 12px;
+            font-size: 15px;
+            background-color: var(--ios-secondary-system-background);
+            color: var(--ios-label);
+            transition: box-shadow 0.18s ease, transform 0.12s ease, background-color 0.18s ease;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--ios-tertiary-label);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--ios-blue);
+            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.08);
+            background-color: var(--ios-system-background);
+            transform: translateY(-1px);
+        }
+
+        .contact-form textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .contact-form .hint {
+            font-size: 13px;
+            color: var(--ios-secondary-label);
+            margin-top: 6px;
+        }
+
+        /* Submit button uses the class present in markup: .submit-button */
+        .contact-form .submit-button {
+            background-color: var(--ios-blue);
+            color: var(--ios-light);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 18px rgba(0, 122, 255, 0.12);
+        }
+
+        .contact-form .submit-button:hover {
+            background-color: #0066CC;
+            transform: translateY(-3px);
+        }
+
+        .contact-form .submit-button:active {
+            transform: translateY(-1px);
+        }
+
+        .contact-form .submit-button:focus {
+            outline: 3px solid rgba(0,122,255,0.12);
+            outline-offset: 2px;
+        }
+
+        /* Make inputs larger on small screens for easier tapping */
+        @media (max-width: 480px) {
+            .contact-form { padding: 22px; }
+            .contact-form input[type="text"],
+            .contact-form input[type="email"],
+            .contact-form textarea { padding: 14px; font-size: 16px; }
+            .contact-form .submit-button { width: 100%; justify-content: center; }
+        }
+
+        /* iOS-style tab bar */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: var(--ios-tabbar-height);
+            background-color: rgba(242, 242, 247, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid var(--ios-separator);
+            z-index: 999;
+        }
+
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--ios-secondary-label);
+            text-decoration: none;
+            font-size: 12px;
+            transition: all 0.2s ease;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .tab-item.active {
+            color: var(--ios-blue);
+        }
+
+        .tab-item:hover {
+            background-color: var(--ios-system-fill);
+        }
+
+        .tab-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 15px;
+            }
+
+            /* Slightly reduce avatar size on narrower screens for better layout */
+            .hero-avatar {
+                width: 140px;
+                height: 140px;
+            }
+
+            .hero-name {
+                font-size: 28px;
+            }
+
+            .hero-title {
+                font-size: 16px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .ios-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .card-grid, .projects-container {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 30px 15px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .timeline::before {
+                left: 10px;
+            }
+
+            .timeline-item {
+                padding-left: 40px;
+            }
+
+            .timeline-dot {
+                left: 2px;
+            }
+        }
+
+        /* Extra small screens enhancements (phones) */
+        @media (max-width: 480px) {
+            .navbar { height: 64px; padding: 0 12px; }
+            .nav-title { font-size: 18px; }
+            .nav-controls { gap: 8px; }
+            .nav-control { width: auto; height: auto; padding: 6px; }
+
+            .hero { padding: 30px 12px; }
+            .hero-avatar { width: 120px; height: 120px; border-radius: 22px; }
+            .hero-name { font-size: 22px; }
+            .hero-title { font-size: 14px; }
+
+            .hero-actions { gap: 10px; }
+            .ios-button { padding: 10px 14px; font-size: 15px; }
+
+            .social-links { gap: 10px; }
+            .social-link { width: 44px; height: 44px; border-radius: 10px; }
+
+            /* make the segmented control scrollable if too wide */
+            .segmented-control { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .segmented-control label { white-space: nowrap; padding: 8px 12px; }
+            .segmented-control .selector { top: 6px; height: calc(100% - 12px); }
+
+            /* tab-bar: increase height for comfortable taps and avoid overlap with safe-area */
+            .tab-bar { height: 88px; padding-bottom: env(safe-area-inset-bottom); }
+            .tab-item { padding: 12px 8px; font-size: 12px; }
+            .tab-icon { font-size: 20px; }
+
+            /* Make project images responsive and not too tall on phones */
+            .project-image { height: 160px; }
+
+            /* Contact form tweaks for phones */
+            .contact-form { padding: 18px; }
+            .contact-form .submit-button { padding: 12px; font-size: 16px; }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --ios-gray: #1C1C1E;
+                --ios-dark: #F2F2F7;
+                --ios-light: #2C2C2E;
+                --ios-label: #FFFFFF;
+                --ios-secondary-label: #EBEBF599;
+                --ios-tertiary-label: #EBEBF54D;
+                --ios-system-fill: #7878805E;
+                --ios-secondary-system-fill: #78788052;
+                --ios-tertiary-system-fill: #7676803D;
+                --ios-quaternary-system-fill: #7474802E;
+                --ios-separator: #54545899;
+                --ios-opaque-separator: #38383A;
+                --ios-system-background: #000000;
+                --ios-secondary-system-background: #1C1C1E;
+                --ios-tertiary-system-background: #2C2C2E;
+                --ios-system-grouped-background: #000000;
+                --ios-secondary-grouped-background: #1C1C1E;
+                --ios-tertiary-grouped-background: #2C2C2E;
+                --ios-dynamic-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
+                --ios-card-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            .navbar {
+                background-color: rgba(28, 28, 30, 0.8);
+            }
+
+            .tab-bar {
+                background-color: rgba(28, 28, 30, 0.8);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Avatar click animation (triggered via JS) */
+        .avatar-click {
+            animation: avatarPop 420ms cubic-bezier(0.2, 1, 0.22, 1);
+            will-change: transform;
+        }
+
+        @keyframes avatarPop {
+            0% { transform: scale(1) rotate(0deg); }
+            30% { transform: scale(1.18) rotate(-6deg); }
+            60% { transform: scale(0.98) rotate(3deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        /* Visual sound bars displayed next to social icons */
+        .sound-bars {
+            display: inline-flex;
+            gap: 3px;
+            align-items: end;
+            margin-left: 8px;
+            width: 20px;
+            height: 14px;
+            vertical-align: middle;
+            opacity: 0.9;
+        }
+
+        .sound-bars span {
+            display: block;
+            width: 3px;
+            background: var(--ios-blue);
+            border-radius: 2px;
+            height: 6px;
+            transform-origin: bottom center;
+            transition: height 120ms ease;
+        }
+
+        /* Animate bars when active */
+        .sound-bars.bars-active span:nth-child(1) { height: 12px; }
+        .sound-bars.bars-active span:nth-child(2) { height: 8px; }
+        .sound-bars.bars-active span:nth-child(3) { height: 14px; }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-5 {
+            animation-delay: 0.5s;
+        }
+
+        /* Unique floating bubbles background */
+        .bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(0, 122, 255, 0.12);
+            border-radius: 50%;
+            opacity: var(--opacity, 0.5);
+            /* Per-bubble control via CSS variables */
+            --duration: 10s;
+            --delay: 0s;
+            --dx: 60px; /* horizontal travel */
+            --scale: 1.05;
+            animation: float var(--duration) var(--delay) infinite ease-in-out;
+            transform-origin: center;
+        }
+        /* Per-bubble sizes, horizontal offsets, durations and delays */
+        .bubble:nth-child(1) { width: 40px; height: 40px; left: 10%; --duration: 8s; --delay: 0s;  --dx: 80px;  --scale: 1.08; }
+        .bubble:nth-child(2) { width: 20px; height: 20px; left: 20%; --duration: 5s; --delay: 1s;  --dx: -60px; --scale: 1.02; }
+        .bubble:nth-child(3) { width: 50px; height: 50px; left: 35%; --duration: 7s; --delay: 2s;  --dx: 100px; --scale: 1.12; }
+        .bubble:nth-child(4) { width: 80px; height: 80px; left: 50%; --duration: 11s; --delay: 0s; --dx: -120px; --scale: 1.06; }
+        .bubble:nth-child(5) { width: 35px; height: 35px; left: 55%; --duration: 6s; --delay: 1s;  --dx: 70px;  --scale: 1.04; }
+        .bubble:nth-child(6) { width: 45px; height: 45px; left: 65%; --duration: 8s; --delay: 3s;  --dx: -90px; --scale: 1.09; }
+        .bubble:nth-child(7) { width: 25px; height: 25px; left: 75%; --duration: 7s; --delay: 2s;  --dx: 50px;  --scale: 1.03; }
+        .bubble:nth-child(8) { width: 80px; height: 80px; left: 80%; --duration: 6s; --delay: 1s;  --dx: -140px; --scale: 1.15; }
+
+        @keyframes float {
+            0% {
+                transform: translateX(0) translateY(0) scale(1);
+                opacity: var(--opacity, 0.5);
+            }
+            50% {
+                transform: translateX(var(--dx)) translateY(-60vh) scale(var(--scale));
+                opacity: calc(var(--opacity, 0.5) * 0.9);
+            }
+            100% {
+                transform: translateX(0) translateY(-120vh) scale(1);
+                opacity: 0.18;
+            }
+        }
+
+        /* Respect user's reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            .bubble { animation: none !important; transition: none !important; }
+        }
+
+        /* Unique app-like notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background-color: var(--ios-system-background);
+            border-radius: 14px;
+            padding: 15px;
+            box-shadow: var(--ios-dynamic-shadow);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(150%);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 1001;
+            max-width: 300px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: var(--ios-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: var(--ios-label);
+        }
+
+        .notification-message {
+            font-size: 14px;
+            color: var(--ios-secondary-label);
+        }
+
+        .notification-close {
+            color: var(--ios-secondary-label);
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Unique iOS-style toggle */
+        .ios-toggle {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 30px;
+        }
+
+        .ios-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--ios-system-fill);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--ios-blue);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        /* Dark theme class override (used when user explicitly chooses dark mode) */
+        html.dark {
+            --ios-gray: #1C1C1E;
+            --ios-dark: #F2F2F7;
+            --ios-light: #2C2C2E;
+            --ios-label: #FFFFFF;
+            --ios-secondary-label: #EBEBF599;
+            --ios-tertiary-label: #EBEBF54D;
+            --ios-system-fill: #7878805E;
+            --ios-secondary-system-fill: #78788052;
+            --ios-tertiary-system-fill: #7676803D;
+            --ios-quaternary-system-fill: #7474802E;
+            --ios-separator: #54545899;
+            --ios-opaque-separator: #38383A;
+            --ios-system-background: #000000;
+            --ios-secondary-system-background: #1C1C1E;
+            --ios-tertiary-system-background: #2C2C2E;
+            --ios-system-grouped-background: #000000;
+            --ios-secondary-grouped-background: #1C1C1E;
+            --ios-tertiary-grouped-background: #2C2C2E;
+            --ios-dynamic-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
+            --ios-card-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Unique loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Unique tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 120px;
+            background-color: var(--ios-dark);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+
+        .tooltip .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--ios-dark) transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Unique progress indicator */
+        .progress-container {
+            width: 100%;
+            background-color: var(--ios-secondary-system-fill);
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 10px;
+            border-radius: 10px;
+            background-color: var(--ios-blue);
+            transition: width 0.5s ease;
+        }
+        /* Profile editor modal */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .modal-backdrop.show {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--ios-system-background);
+            color: var(--ios-label);
+            width: 100%;
+            max-width: 720px;
+            border-radius: 14px;
+            box-shadow: var(--ios-dynamic-shadow);
+            padding: 20px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .modal-body { display: grid; gap: 12px; }
+
+        .avatar-preview {
+            width: 96px;
+            height: 96px;
+            border-radius: 18px;
+            object-fit: cover;
+            border: 3px solid var(--ios-secondary-system-background);
+        }
+
+        .form-row { display:flex; gap:12px; align-items:center; }
+
+        .form-actions { display:flex; gap:10px; justify-content:flex-end; margin-top:12px; }
+
+        /* Theme picker popover */
+        .theme-popover {
+            position: absolute;
+            right: 0;
+            top: 36px;
+            background: var(--ios-system-background);
+            color: var(--ios-label);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            display: none;
+            width: 220px;
+            z-index: 1200;
+        }
+
+        .theme-popover.show { display: block; }
+
+        .swatches { display:flex; gap:8px; flex-wrap:wrap; }
+
+        .swatch { width:28px; height:28px; border-radius:6px; border:none; cursor:pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+
+
+    </style>
+    <style>
+        /* Visual styles for inline editing */
+        .editable {
+            outline: var(--edit-outline, none);
+            padding: 2px 4px;
+            border-radius: 6px;
+        }
+
+        .editing .editable, .editable[contenteditable="true"] {
+            outline: var(--edit-outline, 2px dashed rgba(0,122,255,0.35));
+            background: rgba(0,122,255,0.03);
+        }
+    </style>
+</head>
+<body>
+    <!-- Dynamic Island -->
+    <div class="dynamic-island">
+        <div class="island-time" id="current-time">9:41</div>
+    </div>
+
+    <!-- iOS-style Navbar -->
+    <nav class="navbar">
+        <div class="nav-title">Portfolio</div>
+        <div class="nav-controls">
+            <div class="nav-control control-close">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="nav-control control-minimize">
+                <i class="fas fa-minus"></i>
+            </div>
+            <div class="nav-control control-maximize">
+                <i class="fas fa-expand"></i>
+            </div>
+            <!-- Dark mode toggle -->
+            <div class="nav-control" title="Toggle dark mode" id="theme-toggle-control" style="width:auto;padding:6px 8px;">
+                <label class="ios-toggle" aria-label="Toggle dark mode">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <!-- Edit/profile controls removed -->
+            <!-- Theme picker -->
+            <div class="nav-control" id="theme-picker-control" style="width:auto;padding:6px 8px;position:relative;">
+                <button id="theme-picker-btn" aria-haspopup="true" aria-expanded="false" style="background:none;border:none;cursor:pointer;color:var(--ios-label);font-size:18px;padding:6px;">🎨</button>
+                <div id="theme-popover" class="theme-popover" role="menu" aria-hidden="true">
+                    <div class="swatches">
+                        <button class="swatch" data-color="#007AFF" style="background:#007AFF" aria-label="Blue"></button>
+                        <button class="swatch" data-color="#34C759" style="background:#34C759" aria-label="Green"></button>
+                        <button class="swatch" data-color="#FF9500" style="background:#FF9500" aria-label="Orange"></button>
+                        <button class="swatch" data-color="#AF52DE" style="background:#AF52DE" aria-label="Purple"></button>
+                        <button class="swatch" data-color="#FF2D55" style="background:#FF2D55" aria-label="Pink"></button>
+                        <button class="swatch" data-color="#5AC8FA" style="background:#5AC8FA" aria-label="Teal"></button>
+                    </div>
+                    <div style="margin-top:8px;display:flex;gap:8px;align-items:center;">
+                        <input id="custom-color" type="color" value="#007AFF" style="width:40px;height:28px;border-radius:6px;border:none;">
+                        <button id="apply-custom" class="ios-button ios-button-secondary" style="padding:6px 10px;">Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="bubbles">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+            </div>
+            
+            <img id="profile-avatar" src="/profile copy 3.JPG" alt="D. Dhamodhar (profile image)" class="hero-avatar fade-in" tabindex="0" role="button" aria-label="Profile image (press Enter or Space to animate)" loading="lazy" decoding="async">
+            <h1 id="profile-name" class="hero-name fade-in delay-1">D. DHAMODHAR</h1>
+            <h2 id="profile-title" class="hero-title fade-in delay-2">Frontend Developer & BTech Student</h2>
+            <p class="hero-bio fade-in delay-3">
+                I'm a passionate frontend developer currently pursuing my BTech in ECE (3rd Year). 
+                I specialize in creating beautiful, responsive, and user-friendly web interfaces with modern technologies.
+            </p>
+            <div class="hero-actions fade-in delay-4">
+                <a href="resume.html" target="_blank" rel="noopener" class="ios-button ios-button-secondary">
+                    <i class="fas fa-file-alt"></i> View Resume
+                </a>
+            </div>
+            <div class="social-links fade-in delay-5">
+                <a href="https://github.com/thortyson/" class="social-link tooltip" data-sound="github">
+                    <i class="fab fa-github"></i>
+                    <span class="tooltip-text">GitHub</span>
+                    <span class="sound-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+                </a>
+                <a href="https://www.linkedin.com/in/vaddidhamodhar/" class="social-link tooltip">
+                    <i class="fab fa-linkedin-in"></i>
+                    <span class="tooltip-text">LinkedIn</span>
+                    <span class="sound-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+                </a>
+                <a href="https://x.com/GG98352020" class="social-link tooltip" data-sound="twitter">
+                    <i class="fab fa-twitter"></i>
+                    <span class="tooltip-text">Twitter</span>
+                    <span class="sound-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+                </a>
+                <a href="https://www.instagram.com/thortyson07/" class="social-link tooltip" data-sound="instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span class="tooltip-text">Instagram</span>
+                    <span class="sound-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Segmented Control -->
+        <div class="segmented-control">
+            <input type="radio" name="tab" id="tab-1" checked>
+            <label for="tab-1" onclick="showSection('skills')">Skills</label>
+            
+            <input type="radio" name="tab" id="tab-2">
+            <label for="tab-2" onclick="showSection('projects')">Projects</label>
+            
+            <input type="radio" name="tab" id="tab-3">
+            <label for="tab-3" onclick="showSection('education')">Education</label>
+            
+            <input type="radio" name="tab" id="tab-4">
+            <label for="tab-4" onclick="showSection('contact')">Contact</label>
+            
+            <div class="selector"></div>
+        </div>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <div class="skill-icon card-icon-blue">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <div class="skill-name">HTML5</div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress progress-blue" style="width: 95%"></div>
+                    </div>
+                    <div class="skill-level">Advanced</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <div class="skill-icon card-icon-blue">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <div class="skill-name">CSS3</div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress progress-blue" style="width: 90%"></div>
+                    </div>
+                    <div class="skill-level">Advanced</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <div class="skill-icon card-icon-yellow">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <div class="skill-name">JavaScript</div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress progress-yellow" style="width: 85%"></div>
+                    </div>
+                    <div class="skill-level">Advanced</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <div class="skill-icon card-icon-blue">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <div class="skill-name">React</div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress progress-blue" style="width: 80%"></div>
+                    </div>
+                    <div class="skill-level">Intermediate</div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                                <div class="skill-icon card-icon-purple">
+                                    <i class="fas fa-file-powerpoint"></i>
+                                </div>
+                                <div class="skill-name">PowerPoint</div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress progress-purple" style="width: 85%"></div>
+                    </div>
+                    <div class="skill-level">Advanced</div>
+                </div>
+                
+                
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <div class="skill-icon card-icon-green">
+                            <i class="fab fa-git-alt"></i>
+                        </div>
+                        <div class="skill-name">Git</div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress progress-green" style="width: 80%"></div>
+                    </div>
+                    <div class="skill-level">Intermediate</div>
+                </div>
+                
+                
+            </div>
+        </section>
+
+        <!-- Projects Section (initially hidden) -->
+        <section id="projects" class="section" style="display: none;">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <img src="/world clock copy.jpeg" alt="TIME ZONE" class="project-image" loading="lazy" decoding="async">
+                    <div class="project-content">
+                        <h3 class="project-title">TIME ZONE</h3>
+                        <p class="project-description">
+                            A simple task manager application built with HTML, CSS, and JavaScript. Features include task creation, editing, deletion, and local storage for persistence.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/thortyson/world-time-dashboard" class="ios-button ios-button-secondary" style="padding: 8px 16px;">
+                                <i class="fas fa-code"></i> Code
+                            </a>
+                            <a href="#" class="ios-button ios-button-primary" style="padding: 8px 16px;">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="/calculator copy.jpeg" alt="E-Commerce Store" class="project-image" loading="lazy" decoding="async">
+                    <div class="project-content">
+                        <h3 class="project-title">Calculator with sound effect</h3>
+                        <p class="project-description">
+                            A simple yet elegant calculator application built with Vue.js and Node.js. Features include basic arithmetic operations, history tracking, and sound effects for button presses.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/thortyson/3d-calculator-with-sound-bar" class="ios-button ios-button-secondary" style="padding: 8px 16px;">
+                                <i class="fas fa-code"></i> Code
+                            </a>
+                            <a href="#" class="ios-button ios-button-primary" style="padding: 8px 16px;">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="/weather copy.jpeg" alt="Weather App" class="project-image" loading="lazy" decoding="async">
+                    <div class="project-content">
+                        <h3 class="project-title">Weather Dashboard</h3>
+                        <p class="project-description">
+                            A weather application that displays current and forecasted weather using the OpenWeather API. Features geolocation and interactive charts.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">API</span>
+                            <span class="project-tag">Chart.js</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/thortyson/weather-report" class="ios-button ios-button-secondary" style="padding: 8px 16px;">
+                                <i class="fas fa-code"></i> Code
+                            </a>
+                            <a href="#" class="ios-button ios-button-primary" style="padding: 8px 16px;">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="/Screenshot 2025-09-17 at 8.55.49 PM copy.png" alt="Portfolio Website" class="project-image" loading="lazy" decoding="async">
+                    <div class="project-content">
+                        <h3 class="project-title">Portfolio Website</h3>
+                        <p class="project-description">
+                            A responsive portfolio website built with HTML, CSS, and JavaScript. Features smooth animations and a clean, modern design.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/thortyson/update-portfolio" class="ios-button ios-button-secondary" style="padding: 8px 16px;">
+                                <i class="fas fa-code"></i> Code
+                            </a>
+                            <a href="#" class="ios-button ios-button-primary" style="padding: 8px 16px;">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section (initially hidden) -->
+        <section id="education" class="section" style="display: none;">
+            <h2 class="section-title">Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023 - Present</div>
+                        <h3 class="timeline-title">ECE</h3>
+                        <div class="timeline-subtitle">JNTUA,SSITS</div>
+                        <p class="timeline-description">
+                            Currently in my 3rd year with a focus on web development and user interface design. Coursework includes Data Structures, Algorithms, Database Systems, and Web Technologies.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020 - 2023</div>
+                        <h3 class="timeline-title">Higher Secondary Education</h3>
+                        <div class="timeline-subtitle">State Board, Karnataka</div>
+                        <p class="timeline-description">
+                            Completed with distinction in Mathematics and Computer Science. Developed foundational programming skills in Python.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2018 - 2019</div>
+                        <h3 class="timeline-title">Secondary School Education</h3>
+                        <div class="timeline-subtitle">State Board, AP</div>
+                        <p class="timeline-description">
+                            Graduated with honors. First exposure to computer programming through school curriculum.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            
+        
+        </section>
+
+        <!-- Contact Section (initially hidden) -->
+        <section id="contact" class="section" style="display: none;">
+            <h2 class="section-title">Get In Touch</h2>
+             <div class="contact-form">
+                   <form action="https://api.web3forms.com/submit" method="POST">
+
+                        <input type="hidden" name="access_key" value="b624534d-b3fd-43cc-8c19-525ff7ff1bea">
+                        <input type="hidden" name="_subject" value="New Form Submission">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
+                        
+                     <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">Send Message</button>
+                    </form>
+                </div>
+            
+            <div style="margin-top: 40px; text-align: center;">
+                <p style="margin-bottom: 20px; color: var(--ios-secondary-label);">Or connect with me through:</p>
+                <div class="social-links" style="justify-content: center;">
+                    <a href="mailto:vaddidhamu42@gmail.com" class="social-link tooltip" data-sound="email">
+                        <i class="fas fa-envelope"></i>
+                        <span class="tooltip-text">Email</span>
+                        <span class="sound-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                    <a href="tel:+918688943904" class="social-link tooltip" data-sound="phone">
+                        <i class="fas fa-phone"></i>
+                        <span class="tooltip-text">Call</span>
+                        <span class="sound-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                    <a href="https://wa.me/8688943904" class="social-link tooltip" data-sound="whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        <span class="tooltip-text">WhatsApp</span>
+                        <span class="sound-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/vaddidhamodhar/" class="social-link tooltip" data-sound="linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span class="tooltip-text">LinkedIn</span>
+                        <span class="sound-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                    <a href="https://github.com/thortyson" class="social-link tooltip" data-sound="github">
+                        <i class="fab fa-github"></i>
+                        <span class="tooltip-text">GitHub</span>
+                        <span class="sound-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- iOS-style Tab Bar -->
+    <div class="tab-bar">
+        <a href="#" class="tab-item active" onclick="showSection('skills'); updateTab(this); return false;">
+            <i class="fas fa-star tab-icon"></i>
+            <span>Skills</span>
+        </a>
+        <a href="#" class="tab-item" onclick="showSection('projects'); updateTab(this); return false;">
+            <i class="fas fa-code tab-icon"></i>
+            <span>Projects</span>
+        </a>
+        <a href="#" class="tab-item" onclick="showSection('education'); updateTab(this); return false;">
+            <i class="fas fa-graduation-cap tab-icon"></i>
+            <span>Education</span>
+        </a>
+        <a href="#" class="tab-item" onclick="showSection('contact'); updateTab(this); return false;">
+            <i class="fas fa-envelope tab-icon"></i>
+            <span>Contact</span>
+        </a>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="notification-content">
+            <div class="notification-title">Message Sent</div>
+            <div class="notification-message">Thank you for reaching out! I'll get back to you soon.</div>
+        </div>
+        <div class="notification-close" onclick="hideNotification()">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+
+    <!-- Inline content edit toolbar removed -->
+
+    <!-- Profile editor modal removed -->
+
+    <script>
+        // Update current time in dynamic island
+        function updateTime() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            const timeString = `${hours}:${minutes}`;
+            document.getElementById('current-time').textContent = timeString;
+        }
+        
+        setInterval(updateTime, 1000);
+        updateTime();
+        
+        // Show/hide sections based on segmented control (robust and pixel-accurate)
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            const target = document.getElementById(sectionId);
+            if (!target) return;
+            target.style.display = 'block';
+
+            // play a short UI sound for section switch if available
+            try { if (window.playSound) window.playSound('switch'); } catch (e) { /* ignore */ }
+
+            // Move selector in segmented control using label widths (pixel-accurate)
+            const container = document.querySelector('.segmented-control');
+            const selector = container && container.querySelector('.selector');
+            const labels = container ? Array.from(container.querySelectorAll('label')) : [];
+
+            // Find matching label by text (case-insensitive, trimmed)
+            const labelIndex = labels.findIndex(lbl => lbl.textContent.trim().toLowerCase() === sectionId);
+            if (labelIndex >= 0 && selector && container) {
+                const label = labels[labelIndex];
+                // Compute position relative to container to support scrolling and variable layout
+                const containerRect = container.getBoundingClientRect();
+                const labelRect = label.getBoundingClientRect();
+                const left = Math.max(0, labelRect.left - containerRect.left);
+                const width = labelRect.width;
+                selector.style.width = (Math.max(24, width - 8)) + 'px';
+                selector.style.left = (left + 4) + 'px';
+
+                // Also mark the associated radio input as checked for accessibility
+                const forId = label.getAttribute('for');
+                if (forId) {
+                    const input = document.getElementById(forId);
+                    if (input) input.checked = true;
+                }
+            }
+        }
+        
+        // Update active tab
+        function updateTab(clickedTab) {
+            document.querySelectorAll('.tab-item').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            clickedTab.classList.add('active');
+        }
+        
+        // Show notification
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            setTimeout(hideNotification, 5000);
+        }
+        
+        // Hide notification
+        function hideNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.remove('show');
+        }
+        
+        // Form submission: attach to the form inside .contact-form if present
+        (function() {
+            const form = document.querySelector('.contact-form form');
+            if (!form) return;
+
+            const submitBtn = form.querySelector('.submit-button');
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                if (!submitBtn) return;
+
+                // Prevent double submit
+                if (submitBtn.disabled) return;
+
+                // Save original button HTML to restore later
+                const originalHTML = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+
+                const spinner = document.createElement('div');
+                spinner.className = 'spinner';
+                spinner.setAttribute('aria-hidden', 'true');
+                submitBtn.appendChild(spinner);
+
+                const formData = new FormData(form);
+
+                try {
+                    const resp = await fetch(form.action, {
+                        method: (form.method || 'POST').toUpperCase(),
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    const data = await resp.json().catch(() => ({}));
+
+                    if (resp.ok && (data.success === true || data.success === undefined)) {
+                        form.reset();
+
+                        submitBtn.innerHTML = 'Message Sent!';
+                        const check = document.createElement('i');
+                        check.className = 'fas fa-check';
+                        submitBtn.appendChild(check);
+
+                        showNotification();
+
+                        // If form contains a _next field, redirect after short delay
+                        const next = form.querySelector('input[name="_next"]')?.value;
+                        if (next) {
+                            setTimeout(() => { window.location.href = next; }, 1200);
+                        }
+                    } else {
+                        const msg = (data && (data.message || data.error)) || `Request failed (${resp.status})`;
+                        alert('Failed to send message: ' + msg);
+                    }
+                } catch (err) {
+                    alert('Network error: ' + (err.message || err));
+                } finally {
+                    // Restore button state after a short delay so users see the success state
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalHTML;
+                    }, 1800);
+                }
+            });
+        })();
+        
+        // Small helper: avatar click animation and click sound for notifications
+        (function() {
+            // Use a shared audio context to avoid creating multiple contexts and to
+            // ensure user gesture unlocking works across icons.
+            function getSharedAudioCtx() {
+                try {
+                    if (window._appAudioCtx && (window._appAudioCtx.state !== 'closed')) return window._appAudioCtx;
+                    const C = window.AudioContext || window.webkitAudioContext;
+                    if (!C) return null;
+                    window._appAudioCtx = new C();
+                    return window._appAudioCtx;
+                } catch (e) {
+                    return null;
+                }
+            }
+
+            async function playClickSound() {
+                // Try WebAudio first; if not available, fallback to tiny audio element
+                const ctx = getSharedAudioCtx();
+                if (ctx) {
+                    try {
+                        if (ctx.state === 'suspended') {
+                            // resume must be awaited in some browsers
+                            await ctx.resume().catch(()=>{});
+                        }
+                        const now = ctx.currentTime;
+                        const o = ctx.createOscillator();
+                        const g = ctx.createGain();
+                        o.type = 'sine';
+                        o.frequency.setValueAtTime(880, now);
+                        o.frequency.exponentialRampToValueAtTime(1320, now + 0.06);
+                        g.gain.setValueAtTime(0.001, now);
+                        g.gain.linearRampToValueAtTime(0.12, now + 0.01);
+                        g.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+                        o.connect(g);
+                        g.connect(ctx.destination);
+                        o.start(now);
+                        o.stop(now + 0.14);
+                        return;
+                    } catch (e) {
+                        // fall through to fallback below
+                    }
+                }
+
+                // Fallback: tiny embedded audio (may be silent in some browsers)
+                try {
+                    const a = new Audio();
+                    a.src = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=';
+                    a.play().catch(()=>{});
+                } catch (e) { /* ignore */ }
+            }
+
+            // Attach to avatar
+            const avatar = document.getElementById('profile-avatar');
+            if (avatar) {
+                avatar.style.cursor = 'pointer';
+                avatar.addEventListener('click', async (e) => {
+                    // add animation class
+                    avatar.classList.add('avatar-click');
+                    // play sound (ensure ctx resumed)
+                    playClickSound();
+                    // ensure class removed after animation completes
+                    setTimeout(() => avatar.classList.remove('avatar-click'), 500);
+                });
+            }
+
+            // Play click sound when notification is clicked
+            const notification = document.getElementById('notification');
+            if (notification) {
+                notification.addEventListener('click', (e) => {
+                    playClickSound();
+                });
+
+                const closeBtn = notification.querySelector('.notification-close');
+                if (closeBtn) closeBtn.addEventListener('click', (ev) => { playClickSound(); });
+            }
+
+            // expose a more flexible playSound API globally and add some section listeners
+            function playTone(fStart, fEnd, dur) {
+                const ctx = getSharedAudioCtx();
+                if (!ctx) return playClickSound();
+                try {
+                    const now = ctx.currentTime;
+                    const o = ctx.createOscillator();
+                    const g = ctx.createGain();
+                    o.type = 'sine';
+                    o.frequency.setValueAtTime(fStart, now);
+                    if (fEnd && dur) o.frequency.exponentialRampToValueAtTime(fEnd, now + dur * 0.7);
+                    g.gain.setValueAtTime(0.001, now);
+                    g.gain.linearRampToValueAtTime(0.12, now + Math.min(0.02, dur * 0.2));
+                    g.gain.exponentialRampToValueAtTime(0.001, now + dur);
+                    o.connect(g);
+                    g.connect(ctx.destination);
+                    o.start(now);
+                    o.stop(now + dur);
+                } catch (e) {
+                    // fallback
+                    playClickSound();
+                }
+            }
+
+            function playSound(type) {
+                // types: 'avatar'|'projects'|'education'|'switch'|'click' etc.
+                try {
+                    switch (type) {
+                        case 'avatar':
+                            return playTone(880, 1320, 0.14);
+                        case 'projects':
+                            return playTone(620, 760, 0.18);
+                        case 'education':
+                            return playTone(520, 460, 0.20);
+                        case 'switch':
+                            return playTone(980, 1200, 0.10);
+                        case 'click':
+                        default:
+                            return playClickSound();
+                    }
+                } catch (e) { try { playClickSound(); } catch (e) {} }
+            }
+
+            // expose globally so other parts of app can trigger sounds
+            try { window.playSound = playSound; } catch (e) {}
+
+            // Wire clicks on main sections to play contextual sounds
+            try {
+                const projectsEl = document.getElementById('projects');
+                if (projectsEl) projectsEl.addEventListener('click', () => playSound('projects'));
+                const educationEl = document.getElementById('education');
+                if (educationEl) educationEl.addEventListener('click', () => playSound('education'));
+            } catch (e) { /* ignore */ }
+        })();
+
+        /* Content editing feature: enable inline editing for Projects, Education, and Information */
+        (function() {
+            const EDIT_KEY = 'site-content-data-v1';
+            const editBtn = document.getElementById('content-edit-btn');
+            const toolbar = document.getElementById('content-edit-toolbar');
+            const saveBtn = document.getElementById('save-edit');
+            const cancelBtn = document.getElementById('cancel-edit');
+            let isEditing = false;
+            let backup = null; // will hold a map of selector -> html/text for editable nodes
+
+            // Utility: find editable elements
+            function getEditableNodes() {
+                const nodes = [];
+                // Projects: each .project-card (we'll allow editing title, description, tags, and links)
+                document.querySelectorAll('#projects .project-card').forEach(card => nodes.push(card));
+                // Education timeline items
+                document.querySelectorAll('#education .timeline-item').forEach(item => nodes.push(item));
+                // Information: hero name, title, bio
+                const infoEls = [document.getElementById('profile-name'), document.getElementById('profile-title'), document.querySelector('.hero-bio')];
+                infoEls.forEach(e => e && nodes.push(e));
+                // Contact form fields (placeholder info) - make contact section editable (like email link list)
+                // We'll also allow editing social links container
+                const social = document.querySelector('#contact .social-links');
+                if (social) nodes.push(social);
+                return nodes;
+            }
+
+            // Enter edit mode: make nodes contentEditable or replace text with inputs for complex items
+            function enterEditMode() {
+                if (isEditing) return;
+                isEditing = true;
+                // show toolbar
+                if (toolbar) toolbar.style.display = 'flex';
+                // backup current editable nodes content so we can restore on cancel
+                backup = {};
+                const nodes = getEditableNodes();
+                nodes.forEach(node => {
+                    // create a unique key for the node - prefer id, otherwise use a generated path
+                    const key = node.id || node.getAttribute('data-edit-path') || null;
+                    if (key) backup[key] = { html: node.innerHTML, text: node.textContent };
+                    else {
+                        // fallback: attach a data attribute to identify it later
+                        const uid = 'edit-' + Math.random().toString(36).slice(2,9);
+                        node.setAttribute('data-edit-path', uid);
+                        backup[uid] = { html: node.innerHTML, text: node.textContent };
+                    }
+                });
+
+                // Make simple text nodes editable
+                const editable = nodes;
+                editable.forEach(node => {
+                    // mark as editing
+                    node.classList.add('editing');
+                    // For project-card: make title, description, tags and links editable
+                    if (node.classList && node.classList.contains('project-card')) {
+                        const title = node.querySelector('.project-title');
+                        const desc = node.querySelector('.project-description');
+                        const tags = node.querySelector('.project-tags');
+                        const actions = node.querySelector('.project-actions');
+                        if (title) { title.contentEditable = 'true'; title.classList.add('editable'); }
+                        if (desc) { desc.contentEditable = 'true'; desc.classList.add('editable'); }
+                        if (tags) { tags.contentEditable = 'true'; tags.classList.add('editable'); }
+                        if (actions) { actions.contentEditable = 'true'; actions.classList.add('editable'); }
+                    } else if (node.classList && node.classList.contains('timeline-item')) {
+                        // Timeline: make date, title, subtitle, description editable
+                        const date = node.querySelector('.timeline-date');
+                        const ttitle = node.querySelector('.timeline-title');
+                        const subtitle = node.querySelector('.timeline-subtitle');
+                        const desc = node.querySelector('.timeline-description');
+                        [date, ttitle, subtitle, desc].forEach(el => { if (el) { el.contentEditable = 'true'; el.classList.add('editable'); } });
+                    } else {
+                        // normal node (hero name/title/bio/social-links)
+                        node.contentEditable = 'true';
+                        node.classList.add('editable');
+                    }
+                });
+                // Visual cue via CSS
+                document.documentElement.style.setProperty('--edit-outline', '2px dashed rgba(0,122,255,0.35)');
+            }
+
+            function exitEditMode() {
+                if (!isEditing) return;
+                isEditing = false;
+                if (toolbar) toolbar.style.display = 'none';
+                const editable = getEditableNodes();
+                editable.forEach(node => {
+                    node.classList.remove('editing');
+                    if (node.classList && node.classList.contains('project-card')) {
+                        const title = node.querySelector('.project-title');
+                        const desc = node.querySelector('.project-description');
+                        const tags = node.querySelector('.project-tags');
+                        const actions = node.querySelector('.project-actions');
+                        if (title) { title.contentEditable = 'false'; title.classList.remove('editable'); }
+                        if (desc) { desc.contentEditable = 'false'; desc.classList.remove('editable'); }
+                        if (tags) { tags.contentEditable = 'false'; tags.classList.remove('editable'); }
+                        if (actions) { actions.contentEditable = 'false'; actions.classList.remove('editable'); }
+                    } else if (node.classList && node.classList.contains('timeline-item')) {
+                        const date = node.querySelector('.timeline-date');
+                        const ttitle = node.querySelector('.timeline-title');
+                        const subtitle = node.querySelector('.timeline-subtitle');
+                        const desc = node.querySelector('.timeline-description');
+                        [date, ttitle, subtitle, desc].forEach(el => { if (el) { el.contentEditable = 'false'; el.classList.remove('editable'); } });
+                    } else {
+                        node.contentEditable = 'false';
+                        node.classList.remove('editable');
+                    }
+                });
+                document.documentElement.style.removeProperty('--edit-outline');
+            }
+
+            // Serialize current editable content to an object
+            function serializeContent() {
+                const data = { projects: [], education: [], info: {} };
+                // Projects
+                document.querySelectorAll('#projects .project-card').forEach(card => {
+                    const title = card.querySelector('.project-title')?.textContent.trim() || '';
+                    const desc = card.querySelector('.project-description')?.textContent.trim() || '';
+                    const tagsText = card.querySelector('.project-tags')?.textContent.trim() || '';
+                    const tags = tagsText.split('\n').join(' ').split(/\s{2,}|,|\|/).map(t => t.trim()).filter(Boolean);
+                    const codeLink = card.querySelector('.project-actions a[href]')?.getAttribute('href') || '';
+                    data.projects.push({ title, desc, tags, codeLink });
+                });
+
+                // Education
+                document.querySelectorAll('#education .timeline-item').forEach(item => {
+                    const date = item.querySelector('.timeline-date')?.textContent.trim() || '';
+                    const title = item.querySelector('.timeline-title')?.textContent.trim() || '';
+                    const subtitle = item.querySelector('.timeline-subtitle')?.textContent.trim() || '';
+                    const desc = item.querySelector('.timeline-description')?.textContent.trim() || '';
+                    data.education.push({ date, title, subtitle, desc });
+                });
+
+                // Info
+                data.info.name = document.getElementById('profile-name')?.textContent.trim() || '';
+                data.info.title = document.getElementById('profile-title')?.textContent.trim() || '';
+                data.info.bio = document.querySelector('.hero-bio')?.textContent.trim() || '';
+                // social links (hrefs)
+                data.info.social = [];
+                document.querySelectorAll('#contact .social-links a').forEach(a => {
+                    data.info.social.push({ href: a.getAttribute('href'), title: a.querySelector('.tooltip-text')?.textContent || a.getAttribute('aria-label') || a.textContent.trim() });
+                });
+
+                return data;
+            }
+
+            function saveContentToStorage() {
+                const data = serializeContent();
+                try { localStorage.setItem(EDIT_KEY, JSON.stringify(data)); } catch (e) { alert('Failed to save: ' + e.message); }
+            }
+
+            function loadContentFromStorage() {
+                try {
+                    const raw = localStorage.getItem(EDIT_KEY);
+                    if (!raw) return null;
+                    const data = JSON.parse(raw);
+                    // Apply to DOM (simple mapping)
+                    if (data.info) {
+                        if (data.info.name) document.getElementById('profile-name').textContent = data.info.name;
+                        if (data.info.title) document.getElementById('profile-title').textContent = data.info.title;
+                        if (data.info.bio) document.querySelector('.hero-bio').textContent = data.info.bio;
+                        if (Array.isArray(data.info.social)) {
+                            const container = document.querySelector('#contact .social-links');
+                            if (container) {
+                                container.innerHTML = '';
+                                data.info.social.forEach(s => {
+                                    const a = document.createElement('a');
+                                    a.className = 'social-link tooltip';
+                                    a.href = s.href || '#';
+                                    a.target = '_blank';
+                                    a.rel = 'noreferrer noopener';
+                                    a.innerHTML = `<i class="fas fa-link"></i><span class="tooltip-text">${s.title || ''}</span>`;
+                                    container.appendChild(a);
+                                });
+                            }
+                        }
+                    }
+
+                    if (Array.isArray(data.projects)) {
+                        const container = document.querySelector('.projects-container');
+                        if (container) {
+                            // clear and rebuild simple cards
+                            container.innerHTML = '';
+                            data.projects.forEach(p => {
+                                const card = document.createElement('div');
+                                card.className = 'project-card';
+                                card.innerHTML = `
+                                    <div class="project-content">
+                                        <h3 class="project-title">${escapeHtml(p.title || '')}</h3>
+                                        <p class="project-description">${escapeHtml(p.desc || '')}</p>
+                                        <div class="project-tags">${(p.tags||[]).map(t => `<span class="project-tag">${escapeHtml(t)}</span>`).join('')}</div>
+                                        <div class="project-actions">
+                                            <a href="${escapeAttr(p.codeLink || '#')}" class="ios-button ios-button-secondary" style="padding: 8px 16px;"><i class="fas fa-code"></i> Code</a>
+                                        </div>
+                                    </div>`;
+                                container.appendChild(card);
+                            });
+                        }
+                    }
+
+                    if (Array.isArray(data.education)) {
+                        const container = document.querySelector('#education .timeline');
+                        if (container) {
+                            container.innerHTML = '';
+                            data.education.forEach(e => {
+                                const item = document.createElement('div');
+                                item.className = 'timeline-item';
+                                item.innerHTML = `
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-date">${escapeHtml(e.date || '')}</div>
+                                        <h3 class="timeline-title">${escapeHtml(e.title || '')}</h3>
+                                        <div class="timeline-subtitle">${escapeHtml(e.subtitle || '')}</div>
+                                        <p class="timeline-description">${escapeHtml(e.desc || '')}</p>
+                                    </div>`;
+                                container.appendChild(item);
+                            });
+                        }
+                    }
+
+                    return data;
+                } catch (e) { console.error('loadContentFromStorage', e); return null; }
+            }
+
+            function escapeHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+            function escapeAttr(s) { return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
+            // Cancel: revert DOM by reloading page content from storage or full backup
+            function cancelEdits() {
+                try {
+                    // If we have a per-node backup, restore each node's innerHTML/text
+                    if (backup && typeof backup === 'object') {
+                        const editable = getEditableNodes();
+                        editable.forEach(node => {
+                            const key = node.id || node.getAttribute('data-edit-path') || null;
+                            const entry = key ? backup[key] : null;
+                            if (entry) {
+                                // Prefer restoring innerHTML for complex nodes; for simple text nodes restore textContent
+                                node.innerHTML = entry.html;
+                            }
+                        });
+                    } else {
+                        // Fallback: reload stored content or full reload
+                        const stored = localStorage.getItem(EDIT_KEY);
+                        if (stored) loadContentFromStorage(); else window.location.reload();
+                    }
+                } catch (e) {
+                    // final fallback
+                    window.location.reload();
+                }
+                exitEditMode();
+            }
+
+            // Save: persist edits
+            function saveEdits() {
+                saveContentToStorage();
+                exitEditMode();
+                showNotification();
+            }
+
+            // Wire buttons
+            if (editBtn) editBtn.addEventListener('click', () => { isEditing ? exitEditMode() : enterEditMode(); });
+            if (cancelBtn) cancelBtn.addEventListener('click', cancelEdits);
+            if (saveBtn) saveBtn.addEventListener('click', saveEdits);
+
+            // If storage exists on load, apply it so page reflects saved edits
+            try { loadContentFromStorage(); } catch (e) { /* ignore */ }
+
+            // Small helper: keyboard shortcut Ctrl/Cmd+E to toggle edit mode
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'e') {
+                    e.preventDefault();
+                    if (isEditing) exitEditMode(); else enterEditMode();
+                }
+            });
+        })();
+
+        // Expose a global applyColor that other UI (popover) can use and apply saved color on load
+        (function() {
+            const storageKey = 'theme-color';
+            const root = document.documentElement;
+            // Small, robust hex -> HSL utility (exposed globally for reuse)
+            function hexToHSL(H) {
+                if (!H || typeof H !== 'string') return null;
+                // Normalize
+                const hex = H.trim();
+                let r = 0, g = 0, b = 0;
+                try {
+                    if (hex.length === 4) {
+                        r = '0x' + hex[1] + hex[1];
+                        g = '0x' + hex[2] + hex[2];
+                        b = '0x' + hex[3] + hex[3];
+                    } else if (hex.length === 7) {
+                        r = '0x' + hex[1] + hex[2];
+                        g = '0x' + hex[3] + hex[4];
+                        b = '0x' + hex[5] + hex[6];
+                    } else {
+                        return null;
+                    }
+                    r = +r / 255; g = +g / 255; b = +b / 255;
+                    const cmin = Math.min(r,g,b), cmax = Math.max(r,g,b), delta = cmax - cmin;
+                    let h = 0, s = 0, l = 0;
+                    if (delta === 0) h = 0;
+                    else if (cmax === r) h = ((g - b) / delta) % 6;
+                    else if (cmax === g) h = (b - r) / delta + 2;
+                    else h = (r - g) / delta + 4;
+                    h = Math.round(h * 60);
+                    if (h < 0) h += 360;
+                    l = (cmax + cmin) / 2;
+                    s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+                    s = +(s * 100).toFixed(1);
+                    l = +(l * 100).toFixed(1);
+                    return { h, s, l };
+                } catch (e) { return null; }
+            }
+
+            // expose globally
+            try { window.hexToHSL = hexToHSL; } catch (e) {}
+
+            function applyColorGlobal(hex) {
+                if (!hex) return;
+                try { hex = String(hex).trim(); } catch (e) { return; }
+                root.style.setProperty('--ios-blue', hex);
+                let hsl = null;
+                try { hsl = (window.hexToHSL || hexToHSL)(hex); } catch (e) { hsl = null; }
+                if (hsl) {
+                    const dark = `hsl(${hsl.h}, ${Math.max(20, hsl.s - 6)}%, ${Math.max(8, hsl.l - 12)}%)`;
+                    const light = `hsl(${hsl.h}, ${Math.max(10, hsl.s - 8)}%, ${Math.min(98, hsl.l + 18)}%)`;
+                    root.style.setProperty('--ios-blue-dark', dark);
+                    root.style.setProperty('--ios-light', light);
+                }
+                try { localStorage.setItem(storageKey, hex); } catch (e) {}
+            }
+
+            window.applyColor = applyColorGlobal;
+
+            // apply saved color on load so popover and site reflect it
+            try {
+                const saved = localStorage.getItem(storageKey);
+                if (saved) window.applyColor(saved);
+            } catch (e) {}
+        })();
+
+        // Slightly randomize bubble starting vertical positions and add phase offsets for more organic motion
+        (function() {
+            const bubbles = document.querySelectorAll('.bubble');
+            bubbles.forEach((b, i) => {
+                // small vertical offset so bubbles don't all start from same line
+                const yOffset = Math.round(Math.random() * 120) - 60; // -60..60 px
+                b.style.setProperty('--y-start', `${yOffset}px`);
+
+                // add small phase offset so animations are out of sync each session
+                const phase = (Math.random() * 0.6 - 0.3) + 's';
+                // add to existing delay variable
+                const baseDelay = getComputedStyle(b).getPropertyValue('--delay') || '0s';
+                b.style.setProperty('--delay', `calc(${baseDelay} + ${phase})`);
+            });
+        })();
+
+        // Theme picker: realtime color updates and persistence
+        (function() {
+            const storageKey = 'theme-color';
+            const btn = document.getElementById('theme-picker-btn');
+            const pop = document.getElementById('theme-popover');
+            const swatches = document.querySelectorAll('.swatch');
+            const custom = document.getElementById('custom-color');
+            const applyBtn = document.getElementById('apply-custom');
+
+            function openPopover() {
+                pop.classList.add('show');
+                btn.setAttribute('aria-expanded','true');
+                pop.setAttribute('aria-hidden','false');
+            }
+
+            function closePopover() {
+                pop.classList.remove('show');
+                btn.setAttribute('aria-expanded','false');
+                pop.setAttribute('aria-hidden','true');
+            }
+
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (pop.classList.contains('show')) closePopover(); else openPopover();
+            });
+
+            // Close popover when clicking outside
+            document.addEventListener('click', (e) => { if (!pop.contains(e.target) && e.target !== btn) closePopover(); });
+
+            // Apply a color by updating CSS variables
+            function applyColor(hex) {
+                if (!hex) return;
+                const root = document.documentElement;
+                // Primary
+                root.style.setProperty('--ios-blue', hex);
+
+                // Derived shades (simple HSL manipulations)
+                const hsl = hexToHSL(hex);
+                if (hsl) {
+                    // slightly darker
+                    const dark = `hsl(${hsl.h}, ${Math.max(20, hsl.s - 6)}%, ${Math.max(8, hsl.l - 12)}%)`;
+                    const light = `hsl(${hsl.h}, ${Math.max(10, hsl.s - 8)}%, ${Math.min(98, hsl.l + 18)}%)`;
+                    root.style.setProperty('--ios-blue-dark', dark);
+                    root.style.setProperty('--ios-light', light);
+                }
+
+                try { localStorage.setItem(storageKey, hex); } catch (e) {}
+            }
+
+            // Hook swatches
+            swatches.forEach(s => s.addEventListener('click', (e) => {
+                const c = s.getAttribute('data-color');
+                custom.value = c;
+                applyColor(c);
+            }));
+
+            applyBtn.addEventListener('click', () => { applyColor(custom.value); });
+
+            // Load saved color
+            try {
+                const saved = localStorage.getItem(storageKey);
+                if (saved) { custom.value = saved; applyColor(saved); }
+            } catch (e) {}
+
+            // utility: hex -> hsl
+            function hexToHSL(H) {
+                // Convert hex to RGB first
+                let r = 0, g = 0, b = 0;
+                if (H.length === 4) {
+                    r = '0x' + H[1] + H[1];
+                    g = '0x' + H[2] + H[2];
+                    b = '0x' + H[3] + H[3];
+                } else {
+                    r = '0x' + H[1] + H[2];
+                    g = '0x' + H[3] + H[4];
+                    b = '0x' + H[5] + H[6];
+                }
+                r /= 255; g /= 255; b /= 255;
+                const cmin = Math.min(r,g,b), cmax = Math.max(r,g,b), delta = cmax - cmin;
+                let h = 0, s = 0, l = 0;
+                if (delta === 0) h = 0;
+                else if (cmax === r) h = ((g - b) / delta) % 6;
+                else if (cmax === g) h = (b - r) / delta + 2;
+                else h = (r - g) / delta + 4;
+                h = Math.round(h * 60);
+                if (h < 0) h += 360;
+                l = (cmax + cmin) / 2;
+                s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+                s = +(s * 100).toFixed(1);
+                l = +(l * 100).toFixed(1);
+                return { h, s, l };
+            }
+        })();
+
+        /* Profile editor functionality removed */
+        
+        // Animate skill bars on scroll
+        function animateSkills() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+        
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.id === 'skills') {
+                        animateSkills();
+                    }
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Navbar controls functionality (attach listeners defensively)
+        const controlClose = document.querySelector('.control-close');
+        const controlMinimize = document.querySelector('.control-minimize');
+        const controlMaximize = document.querySelector('.control-maximize');
+
+        if (controlClose) {
+            controlClose.addEventListener('click', () => {
+                document.body.style.transform = 'translateY(100%)';
+                setTimeout(() => {
+                    document.body.style.display = 'none';
+                    alert('Window closed! Refresh to reopen.');
+                }, 300);
+            });
+        }
+
+        if (controlMinimize) {
+            controlMinimize.addEventListener('click', () => {
+                document.body.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    document.body.style.transform = 'scale(1)';
+                }, 300);
+            });
+        }
+
+        if (controlMaximize) {
+            controlMaximize.addEventListener('click', () => {
+                if (!document.fullscreenElement) {
+                    if (document.documentElement.requestFullscreen) {
+                        document.documentElement.requestFullscreen();
+                    }
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    }
+                }
+            });
+        }
+        
+        // Initialize
+        // Ensure selector is positioned correctly for the initial tab
+        showSection('skills');
+
+        // Small timeout to allow DOM layout before calculating label widths
+        setTimeout(() => {
+            showSection('skills');
+        }, 50);
+
+        // Dark mode toggle: persist preference and respect system preference
+        (function() {
+            const root = document.documentElement;
+            const toggle = document.getElementById('theme-toggle');
+            const storageKey = 'theme-preference'; // 'dark' | 'light' | 'system'
+
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    root.classList.add('dark');
+                    toggle.checked = true;
+                } else if (theme === 'light') {
+                    root.classList.remove('dark');
+                    toggle.checked = false;
+                }
+            }
+
+            function getSystemPreference() {
+                return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            // Load saved preference or fallback to system
+            let saved = null;
+            try { saved = localStorage.getItem(storageKey); } catch (e) { /* ignore */ }
+
+            if (saved === 'dark' || saved === 'light') {
+                applyTheme(saved);
+            } else {
+                // no saved preference -> use system preference
+                applyTheme(getSystemPreference());
+            }
+
+            // Listen for toggle changes
+            if (toggle) {
+                toggle.addEventListener('change', () => {
+                    const theme = toggle.checked ? 'dark' : 'light';
+                    try { localStorage.setItem(storageKey, theme); } catch (e) { /* ignore */ }
+                    applyTheme(theme);
+                });
+            }
+
+            // If user hasn't set a preference, keep in sync with system changes
+            try {
+                if (!saved && window.matchMedia) {
+                    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+                    mq.addEventListener ? mq.addEventListener('change', e => {
+                        applyTheme(e.matches ? 'dark' : 'light');
+                    }) : mq.addListener && mq.addListener(e => {
+                        applyTheme(e.matches ? 'dark' : 'light');
+                    });
+                }
+            } catch (e) { /* ignore on older browsers */ }
+        })();
+        // Add sound feedback to segmented control labels and tab bar items
+        (function() {
+            try {
+                const labels = document.querySelectorAll('.segmented-control label');
+                labels.forEach(lbl => lbl.addEventListener('click', () => { try { window.playSound && window.playSound('switch'); } catch (e){} }));
+
+                const tabItems = document.querySelectorAll('.tab-item');
+                tabItems.forEach(t => t.addEventListener('click', () => { try { window.playSound && window.playSound('switch'); } catch (e){} }));
+            } catch (e) { /* ignore */ }
+        })();
+    </script>
+</body>
+</html>
